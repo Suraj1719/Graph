@@ -1,0 +1,28 @@
+For intution  see this post :
+ https://takeuforward.org/graph/graph-representation-in-c/
+ 
+ 
+ Java Code :
+ 
+ //as a matrix
+ lets n = number of nodes   m = number of edges
+ 
+ create a adj[][]  matrix of [n+1][n+1]  . And it is possible for 1 based indexing 
+ fill accordingly . Take given edges node and put adj[u][v]=1 and adj[v][u]=1 .   But this representation take O(n^2) space so we rarely use it .
+ 
+ 
+ 
+ //as a list
+ 
+ List<List<Integer>> adj=new ArrayList<>();
+ for(int i=0;i<=n;i++){
+     adj.add(new ArrayList<>());
+ }
+ 
+ Now iterate through edges and put accordingly .
+ 
+ // if edges from u - > v
+ 
+ 
+ adj.get(u).add(v);
+ adj.get(v).add(u);  //for undirected graph   . For directed graph do accordingly

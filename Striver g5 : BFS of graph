@@ -1,0 +1,33 @@
+see  this post :
+https://takeuforward.org/graph/breadth-first-search-bfs-level-order-traversal/
+
+
+gfg practice link : https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa1ZuaDRWNmRoYURnMXNQUnlx
+                    bmxFY0pXVVlqUXxBQ3Jtc0tudDU1dDdEWkV3ampXNjJuUVh4SEFDczJwbXJSV3NPbTJuZWdnc1J0TUlhX3FZYnlJNHhJblNKZDQ5a3UzUUFvblg0QjR2aXdtYmNt
+                    QjRlWFo3T2JlYy1UY0JabS1sdnlwUEFXSG84MlRzMVNyRDE0TQ&q=https%3A%2F%2Fbit.ly%2F3bn84K8&v=-tgVpUgsQ5k
+                    
+                    
+                    
+         code :
+         class Solution {
+    // Function to return Breadth First Traversal of given graph.
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        // Code here
+        ArrayList<Integer> ans=new ArrayList<>();
+        boolean vis[]=new boolean[V];
+        vis[0]=true;
+        Queue<Integer> q=new LinkedList<>();
+        q.add(0);
+        while(!q.isEmpty()){
+            Integer node=q.poll();
+            ans.add(node);
+            for(Integer x:adj.get(node)){
+                if(vis[x]==false){
+                    vis[x]=true;
+                    q.add(x);
+                }
+            }
+        }
+        return ans;
+    }
+}

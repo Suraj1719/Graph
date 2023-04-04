@@ -1,0 +1,25 @@
+link article : https://takeuforward.org/data-structure/depth-first-search-dfs/
+
+code : 
+
+class Solution {
+    // Function to return a list containing the DFS traversal of the graph.
+    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        // Code here
+        boolean vis[]=new boolean[V];
+        ArrayList<Integer> ans=new ArrayList<>();
+        dfs(0,adj,vis,ans);
+        return ans;
+    }
+    void dfs(int node,ArrayList<ArrayList<Integer>> adj,
+    boolean vis[],ArrayList<Integer> ans){
+        vis[node]=true;
+        ans.add(node);
+        for(Integer x:adj.get(node)){
+            if(vis[x]==false){
+                dfs(x,adj,vis,ans);
+            }
+        }
+        
+    }
+}

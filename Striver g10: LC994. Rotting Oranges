@@ -1,5 +1,7 @@
 question : https://leetcode.com/problems/rotting-oranges/description/
 
+link : https://takeuforward.org/data-structure/rotten-oranges/
+
 code : as we want to find minimum time bfs traversal used as it is the level order traversal
 
 class Solution {

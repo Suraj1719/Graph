@@ -1,0 +1,65 @@
+question : https://leetcode.com/problems/rotting-oranges/description/
+
+code : as we want to find minimum time bfs traversal used as it is the level order traversal
+
+class Solution {
+    //int ans;
+    class pair{
+        int x;
+        int y;
+        int minute;
+        pair(int x,int y,int minute){
+            this.x=x;
+            this.y=y;
+            this.minute=minute;
+        }
+    }
+    public int orangesRotting(int[][] grid) {
+
+        //space O(n*m) overall
+        //time : O(n*m) + O(n*m)*4
+        int n=grid.length;
+        int m=grid[0].length;
+        Queue<pair>q=new LinkedList<>();
+        int vis[][]=new int[n][m];
+        int cnt_fresh=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==2){
+                    q.add(new pair(i,j,0));
+                    vis[i][j]=2;
+                }else{
+                    vis[i][j]=0;
+                }
+                if(grid[i][j]==1)
+                cnt_fresh++;
+            }
+        }
+        //as we want to find minimum time bfs traversal used as it is the level order traversal
+        int time=0;
+        int row[]={-1,0,1,0};
+        int col[]={0,-1,0,1};
+        int cnt=0;
+        while(!q.isEmpty()){
+            int r=q.peek().x;
+            int c=q.peek().y;
+            int t=q.peek().minute;
+            time=Math.max(time,t);
+                q.poll();
+            for(int i=0;i<4;i++){
+                int n_r=r+row[i];
+                int n_c=c+col[i];
+if(n_r>=0 && n_r<n && n_c>=0 && n_c<m && vis[n_r][n_c]==0 && grid[n_r][n_c]==1){
+                q.add(new pair(n_r,n_c,t+1));
+                    vis[n_r][n_c]=2;
+                    cnt++;
+                }
+
+            }
+        }
+    if(cnt!=cnt_fresh)
+    return -1;
+
+    return time;
+    }
+}

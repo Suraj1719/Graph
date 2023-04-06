@@ -1,0 +1,87 @@
+article : https://takeuforward.org/graph/flood-fill-algorithm-graphs/
+
+question :  https://bit.ly/3bxY94d
+
+code : java
+
+DFS traversal approach
+
+class Solution
+{
+    int delrow[]={0,-1,0,1};
+    int delCol[]={-1,0,1,0};
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor)
+    {
+        // Code here 
+        int n=image.length;
+        int m=image[0].length;
+        int ans[][]=image;
+        int init_color=image[sr][sc];
+        //dfs tarversal as we donot need minimum step we can use it
+        dfs(sr,sc,ans,image,init_color,newColor);
+        return ans;
+    }
+    void dfs(int sr,int sc,int ans[][],int image[][],int color,int new_col){
+        ans[sr][sc]=new_col;
+        int n=image.length;
+        int m=image[0].length;
+        for(int i=0;i<4;i++){
+            int nrow=sr+delrow[i];
+            int ncol=sc+delCol[i];
+            if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && image[nrow][ncol]==color
+            && ans[nrow][ncol]!=new_col){
+                dfs(nrow,ncol,ans,image,color,new_col);
+            }
+        }
+    }
+}
+
+
+//BFS traversal approach
+class Solution
+{
+    class pair{
+		int x;
+		int y;
+		pair(int x,int y){
+			this.x=x;
+			this.y=y;
+		}
+	}
+    int delrow[]={0,-1,0,1};
+    int delcol[]={-1,0,1,0};
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor)
+    {
+        // Code here 
+        int n=image.length;
+        int m=image[0].length;
+        int ans[][]=image;
+        int init_color=image[sr][sc];
+        
+        bfs(sr,sc,ans,image,newColor,init_color);
+        
+        return ans;
+    }
+    void bfs(int r,int c,int ans[][],int image[][],int newcolor,int initcolor){
+        int n=image.length;
+        int m=image[0].length;
+        ans[r][c]=newcolor;
+        Queue<pair>q=new LinkedList<>();
+        q.add(new pair(r,c));
+        while(!q.isEmpty()){
+            int row=q.peek().x;
+            int col=q.peek().y;
+            q.poll();
+            for(int i=0;i<4;i++){
+                int nrow=row+delrow[i];
+                int ncol=col+delcol[i];
+                if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && 
+                   image[nrow][ncol]==initcolor && ans[nrow][ncol]!=newcolor){
+                       ans[nrow][ncol]=newcolor;
+                       q.add(new pair(nrow,ncol));
+                   }
+            }
+        }
+    }
+    
+}
